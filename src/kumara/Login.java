@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -50,10 +50,10 @@ public class Login extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-user-20.png"))); // NOI18N
         jLabel1.setText("Username");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 98, -1, -1));
 
-        txtUsername.setForeground(new java.awt.Color(0, 0, 0));
         txtUsername.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,14 +63,13 @@ public class Login extends javax.swing.JFrame {
         jPanel2.add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 133, -1));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-password-20.png"))); // NOI18N
         jLabel2.setText("Password");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 154, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/3d-casual-life-baristas-using-laptop.png"))); // NOI18N
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 42, -1, 262));
 
-        btnLogin.setBackground(new java.awt.Color(255, 255, 255));
-        btnLogin.setForeground(new java.awt.Color(0, 0, 0));
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,7 +78,6 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel2.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 216, 133, -1));
 
-        txtPassword.setForeground(new java.awt.Color(0, 0, 0));
         txtPassword.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,7 +191,8 @@ public class Login extends javax.swing.JFrame {
             if (count > 0) {
                 //JOptionPane.showMessageDialog(this, "Sukses Login");
                 if (P.getLevel().equals("admin")) {
-                    AdminPage O = new AdminPage(P);
+//                    AdminPage O = new AdminPage(P);
+                    adminp O = new adminp(P);                    
                     O.setExtendedState(Frame.MAXIMIZED_BOTH);
                     this.setVisible(false);
                     O.setVisible(true);
