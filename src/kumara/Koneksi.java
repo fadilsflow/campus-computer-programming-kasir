@@ -10,8 +10,8 @@ public class Koneksi {
     public static Connection Go(){
         try {
             MysqlDataSource m = new MysqlDataSource();
-            String url = "jdbc:mysql://localhost:3306/kumara_db";
-            String user = "vv";
+            String url = "jdbc:mysql://localhost:3306/kumara";
+            String user = "root";
             String pass = "vipas";
 //            MysqlDataSource m = new MysqlDataSource();
 //            String url = "jdbc:mysql://localhost:3306/kumara";
