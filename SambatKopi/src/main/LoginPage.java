@@ -305,7 +305,7 @@ public class LoginPage extends javax.swing.JFrame {
                     this.setVisible(false);
                     O.setVisible(true);
                 } else if (P.getLevel().equals("kasir")) {
-                    KasirPage O = new KasirPage(P);
+                    AdminPage O = new AdminPage(P);
                     O.setExtendedState(Frame.MAXIMIZED_BOTH);
                     this.setVisible(false);
                     O.setVisible(true);

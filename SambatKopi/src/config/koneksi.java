@@ -9,10 +9,6 @@ import java.sql.SQLException;
 public class koneksi {
     public static Connection Go(){
         try {
-//            MysqlDataSource m = new MysqlDataSource();
-//            String url = "jdbc:mysql://localhost:3306/sambaturip_db";
-//            String user = "root";
-//            String pass = "vipas";
             MysqlDataSource m = new MysqlDataSource();
             String url = "jdbc:mysql://localhost:3306/sambaturip_db";
             String user = "root";
