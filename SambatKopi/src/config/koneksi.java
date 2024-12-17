@@ -9,10 +9,14 @@ import java.sql.SQLException;
 public class koneksi {
     public static Connection Go(){
         try {
+//            MysqlDataSource m = new MysqlDataSource();
+//            String url = "jdbc:mysql://localhost:3306/sambat";
+//            String user = "root";
+//            String pass = "Wahyu0085!";
             MysqlDataSource m = new MysqlDataSource();
-            String url = "jdbc:mysql://localhost:3306/sambaturip_db";
+            String url = "jdbc:mysql://localhost:3306/sambat";
             String user = "root";
-            String pass = "Wahyu0085!";
+            String pass = "";
             
             Connection C = DriverManager.getConnection(url, user, pass);
             System.out.println("Koneksi sukses");
