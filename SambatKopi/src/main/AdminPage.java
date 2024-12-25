@@ -852,33 +852,27 @@ public class AdminPage extends javax.swing.JFrame {
                 mod_p.removeRow(i);
             }
             
-            Connection K = koneksi.Go();
+            Connection K = koneksi.Go(); 
             Statement S = K.createStatement();
-             String Q = "SELECT * FROM produk WHERE "
-                + "kode LIKE '%" + where + "%' OR "
-                + "nama LIKE '%" + where + "%' OR "
-                + "kategori LIKE '%" + where + "%' OR "
-                + "suplier LIKE '%" + where + "%' OR "
-                + "harga_jual LIKE '%" + where + "%' OR "
-                + "harga_beli LIKE '%" + where + "%'";
+             String Q = "SELECT * FROM products " + where;
+
             ResultSet R = S.executeQuery(Q);
             int no = 1;
             while (R.next()){
-                  int id = R.getInt("id");
-                String kode = R.getString("kode");
-                String nama = R.getString("nama");
-                String gambar = R.getString("gambar");
-                String kategori = R.getString("kategori");
-                String suplier = R.getString("suplier");
-                int harga_jual = R.getInt("harga_jual");
-                int harga_beli = R.getInt("harga_beli");
-                int stok = R.getInt("stok");
+                int id = R.getInt("id");
+                String p_code = R.getString("product_code");
+                String p_name = R.getString("product_name");
+                String p_image = R.getString("product_image");
+                String p_category  = R.getString("product_category");
+                String p_supplier = R.getString("product_supplier");
+                String p_price_s = R.getString("product_price_s");
+                String p_price_b = R.getString("product_price_s");
+                String p_stock = R.getString("product_stock");
 
                 Object[] D = {
-                no, id, kode, nama, gambar, 
-                kategori, suplier, harga_jual, harga_beli, stok
-            };
-            mod_p.addRow(D);
+                    no, id, p_code,p_name, p_image, 
+                    p_category, p_supplier, p_price_s, p_price_b, p_stock};
+                mod_p.addRow(D);
 
             no++;
         }

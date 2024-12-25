@@ -14,9 +14,9 @@ public class koneksi {
 //            String user = "root";
 //            String pass = "Wahyu0085!";
             MysqlDataSource m = new MysqlDataSource();
-            String url = "jdbc:mysql://localhost:3306/sambat";
+            String url = "jdbc:mysql://localhost:8889/sambat";
             String user = "root";
-            String pass = "";
+            String pass = "root";
             
             Connection C = DriverManager.getConnection(url, user, pass);
             System.out.println("Koneksi sukses");
