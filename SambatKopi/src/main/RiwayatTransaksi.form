@@ -108,7 +108,7 @@
               <Table columnCount="4" rowCount="4">
                 <Column editable="true" title="No" type="java.lang.Object"/>
                 <Column editable="true" title="Tanggal" type="java.lang.Object"/>
-                <Column editable="true" title="Nama Produk" type="java.lang.Object"/>
+                <Column editable="true" title="ID Product" type="java.lang.Object"/>
                 <Column editable="true" title="Jumlah Terjual" type="java.lang.Object"/>
               </Table>
             </Property>

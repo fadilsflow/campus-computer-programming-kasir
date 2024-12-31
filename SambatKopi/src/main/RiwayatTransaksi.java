@@ -96,7 +96,7 @@ public class RiwayatTransaksi extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "No", "Tanggal", "Nama Produk", "Jumlah Terjual"
+                "No", "Tanggal", "ID Product", "Jumlah Terjual"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -175,10 +175,10 @@ public class RiwayatTransaksi extends javax.swing.JFrame {
             int no = 1;
             while (rs.next()) {
                 String tanggal = rs.getString("transaction_date");
-                String namaProduk = rs.getString("id_product");
+                String idProduk = rs.getString("id_product");
                 int jumlahTerjual = rs.getInt("qty");
                 
-                tableModel.addRow(new Object[]{no++, tanggal, namaProduk, jumlahTerjual});
+                tableModel.addRow(new Object[]{no++, tanggal, idProduk, jumlahTerjual});
             }
 
         } catch (SQLException e) {

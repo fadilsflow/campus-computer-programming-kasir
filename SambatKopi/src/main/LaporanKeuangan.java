@@ -21,7 +21,7 @@ public class LaporanKeuangan extends javax.swing.JFrame {
      */
     public LaporanKeuangan() {
         initComponents();
-        loadData();
+        loadLaporan();
     }
 
     /**
@@ -166,7 +166,7 @@ public class LaporanKeuangan extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
-    private void loadData() {
+    private void loadLaporan() {
         tableModel = (DefaultTableModel) jTable1.getModel();
         tableModel.setRowCount(0); // Menghapus data lama (jika ada)
 
