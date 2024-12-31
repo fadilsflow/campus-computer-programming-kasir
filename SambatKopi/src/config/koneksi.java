@@ -14,7 +14,7 @@ public class koneksi {
 //            String user = "root";
 //            String pass = "Wahyu0085!";
             MysqlDataSource m = new MysqlDataSource();
-            String url = "jdbc:mysql://localhost:8889/sambat";
+            String url = "jdbc:mysql://localhost:8889/oopb";
             String user = "root";
             String pass = "root";
             
