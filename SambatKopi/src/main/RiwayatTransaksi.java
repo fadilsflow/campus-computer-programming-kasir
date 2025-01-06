@@ -12,16 +12,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 public class RiwayatTransaksi extends javax.swing.JFrame {
 
     private DefaultTableModel tableModel;
-
+    private Profile p;
     /**
      * Creates new form LaporanKeuangan
      */
     public RiwayatTransaksi() {
         initComponents();
         loadData();
+    }
+        public RiwayatTransaksi(Profile P){
+        initComponents();
+        this.p = P;
+
     }
 
     /**
@@ -107,7 +113,7 @@ public class RiwayatTransaksi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        KasirPage L = new KasirPage();
+        KasirPage L = new KasirPage(p);
         L.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         L.setVisible(true);
@@ -115,7 +121,7 @@ public class RiwayatTransaksi extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        KasirPage L = new KasirPage();
+        KasirPage L = new KasirPage(p);
         L.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         L.setVisible(true);

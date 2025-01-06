@@ -711,7 +711,7 @@ public class AdminPage extends javax.swing.JFrame {
                 }
             }
             
-        }else {
+    }else {
             JOptionPane.showMessageDialog(this, "Anda belum memilih data");
         }
     }//GEN-LAST:event_btnHapusprodukActionPerformed

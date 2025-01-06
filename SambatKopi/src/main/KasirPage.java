@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package main;
+
 import java.sql.PreparedStatement;
 import config.koneksi;
 import java.awt.event.KeyEvent;
@@ -23,21 +24,23 @@ import javax.swing.table.DefaultTableModel;
  * @author LABKOM
  */
 public class KasirPage extends javax.swing.JFrame {
+
     Profile p;
+
     /**
      * Creates new form MainApp
      */
     public KasirPage() {
         initComponents();
-        
 
-        tblCart.getColumnModel().getColumn(0).setMinWidth(0); 
-        tblCart.getColumnModel().getColumn(0).setMaxWidth(0); 
-        
+        tblCart.getColumnModel().getColumn(0).setMinWidth(0);
+        tblCart.getColumnModel().getColumn(0).setMaxWidth(0);
+
         enableCheckoutBtn(false);
         txtID.requestFocusInWindow();
     }
-    public KasirPage(Profile P){
+
+    public KasirPage(Profile P) {
         initComponents();
         this.p = P;
         jLabel6.setText(p.getFullname() + "(" + p.getLevel() + ")");
@@ -67,8 +70,8 @@ public class KasirPage extends javax.swing.JFrame {
         lblKembali = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnLaporanKeuangan = new javax.swing.JButton();
+        btnRiwayatTransaksi = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCart = new javax.swing.JTable();
@@ -192,27 +195,27 @@ public class KasirPage extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Laporan Keuangan");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLaporanKeuangan.setText("Laporan Keuangan");
+        btnLaporanKeuangan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
+                btnLaporanKeuanganMouseClicked(evt);
             }
         });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnLaporanKeuangan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnLaporanKeuanganActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Riwayat Transaksi");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRiwayatTransaksi.setText("Riwayat Transaksi");
+        btnRiwayatTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
+                btnRiwayatTransaksiMouseClicked(evt);
             }
         });
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnRiwayatTransaksi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnRiwayatTransaksiActionPerformed(evt);
             }
         });
 
@@ -223,8 +226,8 @@ public class KasirPage extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
+                    .addComponent(btnRiwayatTransaksi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLaporanKeuangan, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -264,9 +267,9 @@ public class KasirPage extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnLaporanKeuangan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnRiwayatTransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -326,38 +329,36 @@ public class KasirPage extends javax.swing.JFrame {
                 String pName = R.getString("product_name");
                 double pPr = R.getDouble("product_price_s");
                 int pSt = R.getInt("product_stock");
-                
-//                boolean adadiTabel = cekID();                
-                
 
+//                boolean adadiTabel = cekID();                
                 //cek, apakah produk sudah ada di keranjang
                 int dt = tblCart.getRowCount();//0
-                if(dt > 0){
+                if (dt > 0) {
                     boolean ada = false;
                     int baris = 0;
                     int QTY = 0;
                     for (int i = 0; i < dt; i++) {
                         int dt_id = Integer.parseInt(tblCart.getValueAt(i, 0).toString());
                         int dt_QTY = Integer.parseInt(tblCart.getValueAt(i, 2).toString());
-                        if(dt_id == id){
+                        if (dt_id == id) {
                             ada = true;
                             baris = i;
                             QTY = dt_QTY;
                             break;
                         }
                     }
-                    
+
                     //percabangan +QTY atau add new produk
-                    if(ada){
-                        tblCart.setValueAt(QTY+1, baris, 2);
-                    }else {
+                    if (ada) {
+                        tblCart.setValueAt(QTY + 1, baris, 2);
+                    } else {
                         Object[] data = {id, pName, 1, pPr};
                         model.addRow(data);
                     }
-                }else{
+                } else {
                     Object[] data = {id, pName, 1, pPr};
                     model.addRow(data);
-                } 
+                }
             }
 
             updateharga();
@@ -373,76 +374,83 @@ public class KasirPage extends javax.swing.JFrame {
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         String val = jTextField1.getText();
-        if(!val.isEmpty()){
-            int bayar = Integer.parseInt(val);
-            String TH = lblTotalHarga.getText();
-            String[] arrTH = TH.split(" ");
-            int totalH = Integer.parseInt(arrTH[1]);
-            if(bayar >= totalH){
-                long sisa = bayar-totalH;
-                lblKembali.setText("Rp "+sisa);
-                enableCheckoutBtn(true); 
-            }else{
+        if (!val.isEmpty()) {
+            try {
+                int bayar = Integer.parseInt(val);
+                String TH = lblTotalHarga.getText();
+                String[] arrTH = TH.split(" ");
+                int totalH = Integer.parseInt(arrTH[1]);
+
+                // Check if payment is sufficient and if there are products in the cart
+                if (bayar >= totalH && tblCart.getRowCount() > 0) {
+                    long sisa = bayar - totalH;
+                    lblKembali.setText("Rp " + sisa);
+                    enableCheckoutBtn(true); // Enable the checkout button
+                } else {
+                    lblKembali.setText("Rp 0");
+                    enableCheckoutBtn(false); // Disable the checkout button
+                }
+            } catch (NumberFormatException e) {
                 lblKembali.setText("Rp 0");
-                enableCheckoutBtn(false); 
+                enableCheckoutBtn(false); // Disable the checkout button if input is invalid
             }
-        }else{
+        } else {
             lblKembali.setText("Rp 0");
-            enableCheckoutBtn(false);
-        }
-    }//GEN-LAST:event_jTextField1KeyReleased
+            enableCheckoutBtn(false); // Disable the checkout button if input is empty
+        }    }//GEN-LAST:event_jTextField1KeyReleased
 
     private void txtIDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyTyped
-        
+
     }//GEN-LAST:event_txtIDKeyTyped
 
     private void txtIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDKeyPressed
         int keyCode = evt.getKeyCode();
-        if(keyCode == KeyEvent.VK_F4){
-            jTextField1.setText(""); 
+        if (keyCode == KeyEvent.VK_F4) {
+            jTextField1.setText("");
             jTextField1.requestFocus();
         }
     }//GEN-LAST:event_txtIDKeyPressed
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         int keyCode = evt.getKeyCode();
-        if(keyCode == KeyEvent.VK_F3){
-            txtID.setText(""); 
+        if (keyCode == KeyEvent.VK_F3) {
+            txtID.setText("");
             txtID.requestFocus();
         }
     }//GEN-LAST:event_jTextField1KeyPressed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    try {
+        try {
         Connection K = koneksi.Go();
         K.setAutoCommit(false);
-        
+
         // Insert main transaction
         SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
         String tgl = SDF.format(new Date());
-        String Q = "INSERT INTO transaction (tanggal, customer) VALUES (?, '0')";
-        
+        String Q = "INSERT INTO transaction (tanggal, customer, cashier_id) VALUES (?, '0', ?)";
+
         PreparedStatement PS = K.prepareStatement(Q, Statement.RETURN_GENERATED_KEYS);
         PS.setString(1, tgl);
+        PS.setInt(2, p.getId()); // Use cashier ID from Profile
         PS.executeUpdate();
-        
+
         // Get transaction ID
         ResultSet RS = PS.getGeneratedKeys();
         int transactionId = 0;
         if (RS.next()) {
             transactionId = RS.getInt(1);
         }
-        
+
         // Insert transaction details
         String detailQuery = "INSERT INTO transaction_detail (id_transaction, id_product, qty, transaction_date, price) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement PSDetail = K.prepareStatement(detailQuery);
-        
+
         int row = tblCart.getRowCount();
         for (int i = 0; i < row; i++) {
             int productId = Integer.parseInt(tblCart.getValueAt(i, 0).toString());
             int qty = Integer.parseInt(tblCart.getValueAt(i, 2).toString());
             double price = Double.parseDouble(tblCart.getValueAt(i, 3).toString());
-            
+
             PSDetail.setInt(1, transactionId);
             PSDetail.setInt(2, productId);
             PSDetail.setInt(3, qty);
@@ -450,73 +458,76 @@ public class KasirPage extends javax.swing.JFrame {
             PSDetail.setDouble(5, price);
             PSDetail.executeUpdate();
         }
-        
-        K.commit();
-        
-        // Show nota
-        Nota N = new Nota(this, false);
-        N.setMODEL((DefaultTableModel) tblCart.getModel()); 
-        N.setVisible(true);
-        
-//        // Clear cart
-//        DefaultTableModel model = (DefaultTableModel) tblCart.getModel();
-//        model.setRowCount(0);
-//        lblTotalHarga.setText("Rp 0");
-//        jTextField1.setText("");
-//        txtID.requestFocus();
-//        
-    } catch (SQLException e) {
-    }
 
+        K.commit();
+
+        // Show success message
+        JOptionPane.showMessageDialog(this, "Transaction successful!");
+
+        // Show nota
+        Nota notaDialog = new Nota(this, true);
+        notaDialog.setMODEL((DefaultTableModel) tblCart.getModel()); // Pass the model
+        notaDialog.setTotalHarga(lblTotalHarga.getText()); // Pass total price
+        notaDialog.setUangPembayaran(jTextField1.getText()); // Pass payment amount
+        notaDialog.setUangKembali(lblKembali.getText()); // Pass change
+        notaDialog.setVisible(true);
+
+        // Clear cart
+        clearCart();
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Transaction failed: " + e.getMessage());
+    }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    // Membuka JFrame LaporanKeuangan
-    RiwayatTransaksi RiwayatTransaksi = new RiwayatTransaksi();
+    private void btnRiwayatTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRiwayatTransaksiActionPerformed
+        // Membuka JFrame LaporanKeuangan
+        RiwayatTransaksi RiwayatTransaksi = new RiwayatTransaksi(p);
 
-    // Mengatur JFrame LaporanKeuangan ke fullscreen
-    RiwayatTransaksi.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    RiwayatTransaksi.setVisible(true);
+        // Mengatur JFrame LaporanKeuangan ke fullscreen
+        RiwayatTransaksi.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        RiwayatTransaksi.setVisible(true);
 
-    // Menutup JFrame KasirPage
-    this.dispose();
-       }//GEN-LAST:event_jButton4ActionPerformed
+        // Menutup JFrame KasirPage
+        this.dispose();
+       }//GEN-LAST:event_btnRiwayatTransaksiActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    // Membuka JFrame LaporanKeuangan
-    LaporanKeuangan laporanKeuangan = new LaporanKeuangan();
+    private void btnLaporanKeuanganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaporanKeuanganActionPerformed
+        // Membuka JFrame LaporanKeuangan
+        LaporanKeuangan laporanKeuangan = new LaporanKeuangan(p);
 
-    // Mengatur JFrame LaporanKeuangan ke fullscreen
-    laporanKeuangan.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    laporanKeuangan.setVisible(true);
+        // Mengatur JFrame LaporanKeuangan ke fullscreen
+        laporanKeuangan.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        laporanKeuangan.setVisible(true);
 
-    // Menutup JFrame KasirPage
-    this.dispose(); // Menutup JFrame saat ini
-    }//GEN-LAST:event_jButton3ActionPerformed
+        // Menutup JFrame KasirPage
+        this.dispose(); // Menutup JFrame saat ini
+    }//GEN-LAST:event_btnLaporanKeuanganActionPerformed
 
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-   // Membuka JFrame LaporanKeuangan
-    RiwayatTransaksi RiwayatTransaksi = new RiwayatTransaksi();
+    private void btnRiwayatTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRiwayatTransaksiMouseClicked
+        // Membuka JFrame LaporanKeuangan
+        RiwayatTransaksi RiwayatTransaksi = new RiwayatTransaksi(p);
 
-    // Mengatur JFrame LaporanKeuangan ke fullscreen
-    RiwayatTransaksi.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    RiwayatTransaksi.setVisible(true);
+        // Mengatur JFrame LaporanKeuangan ke fullscreen
+        RiwayatTransaksi.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        RiwayatTransaksi.setVisible(true);
 
-    // Menutup JFrame KasirPage
-    this.dispose();
-    }//GEN-LAST:event_jButton4MouseClicked
+        // Menutup JFrame KasirPage
+        this.dispose();
+    }//GEN-LAST:event_btnRiwayatTransaksiMouseClicked
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-    // Membuka JFrame LaporanKeuangan
-    LaporanKeuangan laporanKeuangan = new LaporanKeuangan();
+    private void btnLaporanKeuanganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaporanKeuanganMouseClicked
+        // Membuka JFrame LaporanKeuangan
+        LaporanKeuangan laporanKeuangan = new LaporanKeuangan(p);
 
-    // Mengatur JFrame LaporanKeuangan ke fullscreen
-    laporanKeuangan.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    laporanKeuangan.setVisible(true);
+        // Mengatur JFrame LaporanKeuangan ke fullscreen
+        laporanKeuangan.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        laporanKeuangan.setVisible(true);
 
-    // Menutup JFrame KasirPage
-    this.dispose(); // Menutup JFrame saat ini
-    }//GEN-LAST:event_jButton3MouseClicked
+        // Menutup JFrame KasirPage
+        this.dispose(); // Menutup JFrame saat ini
+    }//GEN-LAST:event_btnLaporanKeuanganMouseClicked
 
     /**
      * @param args the command line arguments
@@ -557,10 +568,10 @@ public class KasirPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLaporanKeuangan;
+    private javax.swing.JButton btnRiwayatTransaksi;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -588,7 +599,7 @@ public class KasirPage extends javax.swing.JFrame {
                 totalHarga += (QTY * PRC);
             }
             lblTotalHarga.setText("Rp " + (long) totalHarga);
-            txtID.setText(""); 
+            txtID.setText("");
             txtID.requestFocus();
         } catch (NumberFormatException e) {
         }
@@ -596,20 +607,26 @@ public class KasirPage extends javax.swing.JFrame {
 
     private void removeProductFromCart() {
         int idx = tblCart.getSelectedRow();
-        if(idx != -1){
+        if (idx != -1) {
             DefaultTableModel m = (DefaultTableModel) tblCart.getModel();
-            m.removeRow(idx); 
+            m.removeRow(idx);
             updateharga();
-        }else {
-            JOptionPane.showMessageDialog(this, "Anda belum memilihi data"); 
+        } else {
+            JOptionPane.showMessageDialog(this, "Anda belum memilihi data");
         }
     }
 
-    private void enableCheckoutBtn(boolean b) {
-        if(b){
-            jButton2.setEnabled(b); 
-        }else{
-            jButton2.setEnabled(b); 
-        }
+    private void enableCheckoutBtn(boolean enable) {
+        jButton2.setEnabled(enable);
+
     }
+
+    private void clearCart() {
+        DefaultTableModel model = (DefaultTableModel) tblCart.getModel();
+        model.setRowCount(0);
+        lblTotalHarga.setText("Rp 0");
+        jTextField1.setText("");
+        txtID.requestFocus();
+    }
+
 }

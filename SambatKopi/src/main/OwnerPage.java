@@ -4,23 +4,43 @@
  */
 package main;
 
+import config.koneksi;
+import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.util.Locale;
+import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 /**
  *
  * @author fadil
  */
 public class OwnerPage extends javax.swing.JFrame {
+
     Profile p;
+
     /**
      * Creates new form OwnerPage
      */
     public OwnerPage() {
         initComponents();
     }
+
     public OwnerPage(Profile P) {
         initComponents();
-
+        updateProdukTerjual();
         this.p = P;
-//        LabelUser.setText(p.getFullname() + "(" + p.getLevel() + ")");
+      //        LabelUser.setText(p.getFullname() + "(" + p.getLevel() + ")");
     }
 
     /**
@@ -32,21 +52,499 @@ public class OwnerPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jDateChooserDari = new com.toedter.calendar.JDateChooser();
+        jDateChooserSampai = new com.toedter.calendar.JDateChooser();
+        jLabelProdukTerjual = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jDateChooserTerlarisDari = new com.toedter.calendar.JDateChooser();
+        jDateChooserTerlarisSampai = new com.toedter.calendar.JDateChooser();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableTerlaris = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabelJumlahPendapatan = new javax.swing.JLabel();
+        jDateChooserPendapatanDari = new com.toedter.calendar.JDateChooser();
+        jDateChooserPendapatanSampai = new com.toedter.calendar.JDateChooser();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jDateChooserGrafikDari = new com.toedter.calendar.JDateChooser();
+        jDateChooserGrafikSampai = new com.toedter.calendar.JDateChooser();
+        jPanelGrafik = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jDateChooserRankSampai = new com.toedter.calendar.JDateChooser();
+        jDateChooserRankDari = new com.toedter.calendar.JDateChooser();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableRank = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 731, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
+
+        jPanel4.setBackground(new java.awt.Color(204, 204, 255));
+
+        jLabel1.setText("Produk Terjual");
+
+        jLabel2.setText("Dari:");
+
+        jLabel3.setText("Sampai:");
+
+        jDateChooserDari.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooserDariPropertyChange(evt);
+            }
+        });
+
+        jDateChooserSampai.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooserSampaiPropertyChange(evt);
+            }
+        });
+
+        jLabelProdukTerjual.setText("0");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooserDari, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jDateChooserSampai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabelProdukTerjual)
+                .addGap(124, 124, 124))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelProdukTerjual)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jDateChooserDari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jDateChooserSampai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39))
+        );
+
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        jLabel4.setText("Produk Terlaris");
+
+        jLabel5.setText("Dari:");
+
+        jLabel6.setText("Sampai:");
+
+        jDateChooserTerlarisDari.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooserTerlarisDariPropertyChange(evt);
+            }
+        });
+
+        jDateChooserTerlarisSampai.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooserTerlarisSampaiPropertyChange(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooserTerlarisDari, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooserTerlarisSampai, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(190, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addGap(30, 30, 30)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jDateChooserTerlarisDari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jDateChooserTerlarisSampai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
+        jPanel5.add(jPanel8, java.awt.BorderLayout.PAGE_START);
+
+        jTableTerlaris.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nomor", "Jumlah Barang", "Nama Barang"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableTerlaris);
+
+        jPanel5.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jLabel7.setText("Jumlah Pendapatan");
+
+        jLabel8.setText("Dari:");
+
+        jLabel9.setText("Sampai:");
+
+        jLabelJumlahPendapatan.setText("Rp. XXX.XXX.XXX");
+
+        jDateChooserPendapatanDari.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooserPendapatanDariPropertyChange(evt);
+            }
+        });
+
+        jDateChooserPendapatanSampai.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooserPendapatanSampaiPropertyChange(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(145, 145, 145))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(jLabelJumlahPendapatan))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(63, 63, 63)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jDateChooserPendapatanDari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooserPendapatanSampai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel7)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jDateChooserPendapatanDari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addComponent(jDateChooserPendapatanSampai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelJumlahPendapatan)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel7.setLayout(new java.awt.BorderLayout());
+
+        jLabel10.setText(" Grafik Penjualan");
+
+        jLabel11.setText("Dari:");
+
+        jLabel12.setText("Sampai:");
+
+        jDateChooserGrafikDari.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooserGrafikDariPropertyChange(evt);
+            }
+        });
+
+        jDateChooserGrafikSampai.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooserGrafikSampaiPropertyChange(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(jLabel11)
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooserGrafikDari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10)))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel12)
+                        .addGap(18, 18, 18)
+                        .addComponent(jDateChooserGrafikSampai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel11))
+                    .addComponent(jDateChooserGrafikDari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateChooserGrafikSampai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+
+        jPanel7.add(jPanel9, java.awt.BorderLayout.PAGE_START);
+
+        jPanelGrafik.setLayout(new java.awt.BorderLayout());
+        jPanel7.add(jPanelGrafik, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+        );
+
+        jTabbedPane1.addTab("Overview", jPanel2);
+
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jLabel13.setText("Kasir Rank");
+
+        jLabel14.setText("Dari:");
+
+        jLabel15.setText("Sampai:");
+
+        jDateChooserRankSampai.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooserRankSampaiPropertyChange(evt);
+            }
+        });
+
+        jDateChooserRankDari.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooserRankDariPropertyChange(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel14))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(jLabel13))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jDateChooserRankDari, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                            .addComponent(jDateChooserRankSampai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(399, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel13)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14)
+                    .addComponent(jDateChooserRankDari, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel15)
+                    .addComponent(jDateChooserRankSampai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(7, Short.MAX_VALUE))
+        );
+
+        jPanel3.add(jPanel10, java.awt.BorderLayout.PAGE_START);
+
+        jTableRank.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nomor", "Nama", "Jumlah transaksi", "Jumlah Barang"
+            }
+        ));
+        jScrollPane2.setViewportView(jTableRank);
+
+        jPanel3.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jTabbedPane1.addTab("Kasir Rank", jPanel3);
+
+        getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jDateChooserDariPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserDariPropertyChange
+        if ("date".equals(evt.getPropertyName())) {
+            updateProdukTerjual();
+        }
+    }//GEN-LAST:event_jDateChooserDariPropertyChange
+
+    private void jDateChooserSampaiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserSampaiPropertyChange
+        if ("date".equals(evt.getPropertyName())) {
+            updateProdukTerjual();
+        }
+    }//GEN-LAST:event_jDateChooserSampaiPropertyChange
+
+    private void jDateChooserTerlarisDariPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserTerlarisDariPropertyChange
+        if ("date".equals(evt.getPropertyName())) {
+            updateTerlaris();
+        }
+    }//GEN-LAST:event_jDateChooserTerlarisDariPropertyChange
+
+    private void jDateChooserTerlarisSampaiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserTerlarisSampaiPropertyChange
+        if ("date".equals(evt.getPropertyName())) {
+            updateTerlaris();
+        }
+    }//GEN-LAST:event_jDateChooserTerlarisSampaiPropertyChange
+
+    private void jDateChooserPendapatanDariPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserPendapatanDariPropertyChange
+        if ("date".equals(evt.getPropertyName())) {
+            updatePendapatan();
+        }
+    }//GEN-LAST:event_jDateChooserPendapatanDariPropertyChange
+
+    private void jDateChooserPendapatanSampaiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserPendapatanSampaiPropertyChange
+        if ("date".equals(evt.getPropertyName())) {
+            updatePendapatan();
+        }
+    }//GEN-LAST:event_jDateChooserPendapatanSampaiPropertyChange
+
+    private void jDateChooserGrafikDariPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserGrafikDariPropertyChange
+        if ("date".equals(evt.getPropertyName())) {
+            updateGrafik();
+        }
+    }//GEN-LAST:event_jDateChooserGrafikDariPropertyChange
+
+    private void jDateChooserGrafikSampaiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserGrafikSampaiPropertyChange
+        if ("date".equals(evt.getPropertyName())) {
+            updateGrafik();
+        }
+    }//GEN-LAST:event_jDateChooserGrafikSampaiPropertyChange
+
+    private void jDateChooserRankDariPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserRankDariPropertyChange
+        if ("date".equals(evt.getPropertyName())) {
+            updateRank();
+        }
+    }//GEN-LAST:event_jDateChooserRankDariPropertyChange
+
+    private void jDateChooserRankSampaiPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooserRankSampaiPropertyChange
+        if ("date".equals(evt.getPropertyName())) {
+            updateRank();
+        }
+    }//GEN-LAST:event_jDateChooserRankSampaiPropertyChange
 
     /**
      * @param args the command line arguments
@@ -84,5 +582,299 @@ public class OwnerPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser jDateChooserDari;
+    private com.toedter.calendar.JDateChooser jDateChooserGrafikDari;
+    private com.toedter.calendar.JDateChooser jDateChooserGrafikSampai;
+    private com.toedter.calendar.JDateChooser jDateChooserPendapatanDari;
+    private com.toedter.calendar.JDateChooser jDateChooserPendapatanSampai;
+    private com.toedter.calendar.JDateChooser jDateChooserRankDari;
+    private com.toedter.calendar.JDateChooser jDateChooserRankSampai;
+    private com.toedter.calendar.JDateChooser jDateChooserSampai;
+    private com.toedter.calendar.JDateChooser jDateChooserTerlarisDari;
+    private com.toedter.calendar.JDateChooser jDateChooserTerlarisSampai;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelJumlahPendapatan;
+    private javax.swing.JLabel jLabelProdukTerjual;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanelGrafik;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTableRank;
+    private javax.swing.JTable jTableTerlaris;
     // End of variables declaration//GEN-END:variables
+
+    private void updateProdukTerjual() {
+        // Get the selected dates from the date choosers
+        Date dari = jDateChooserDari.getDate();
+        Date sampai = jDateChooserSampai.getDate();
+
+        // Check if dates are selected
+        if (dari == null || sampai == null) {
+            jLabelProdukTerjual.setText("Please select both dates.");
+            return;
+        }
+
+        // Format the dates to SQL format
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dariString = sdf.format(dari);
+        String sampaiString = sdf.format(sampai);
+
+        // SQL query to count products sold in the specified date range
+        String query = "SELECT SUM(qty) AS total_terjual FROM transaction_detail "
+                + "JOIN `transaction` ON transaction_detail.id_transaction = `transaction`.id "
+                + "WHERE `transaction`.tanggal BETWEEN ? AND ?";
+
+        try (Connection conn = config.koneksi.Go(); // Assuming your connection class is named 'koneksi'
+                 PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, dariString);
+            pstmt.setString(2, sampaiString);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                int totalTerjual = rs.getInt("total_terjual");
+                jLabelProdukTerjual.setText(String.valueOf(totalTerjual));
+            } else {
+                jLabelProdukTerjual.setText("0");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            jLabelProdukTerjual.setText("Error: " + e.getMessage());
+        }
+    }
+
+    private void updateTerlaris() {
+        Date dari = jDateChooserTerlarisDari.getDate();
+        Date sampai = jDateChooserTerlarisSampai.getDate();
+
+        if (dari == null || sampai == null) {
+            // Clear the table if dates are not selected
+            DefaultTableModel model = (DefaultTableModel) jTableTerlaris.getModel();
+            model.setRowCount(0);
+            return;
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dariString = sdf.format(dari);
+        String sampaiString = sdf.format(sampai);
+
+        String query = "SELECT p.id, SUM(td.qty) AS total_qty, p.product_name "
+                + "FROM transaction_detail td "
+                + "JOIN `transaction` t ON td.id_transaction = t.id "
+                + "JOIN products p ON td.id_product = p.id "
+                + "WHERE t.tanggal BETWEEN ? AND ? "
+                + "GROUP BY p.id, p.product_name "
+                + "ORDER BY total_qty DESC";
+
+        try (Connection conn = config.koneksi.Go(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, dariString);
+            pstmt.setString(2, sampaiString);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            // Clear the table before adding new data
+            DefaultTableModel model = (DefaultTableModel) jTableTerlaris.getModel();
+            model.setRowCount(0);
+
+            int rowNumber = 1; // Initialize row number
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int totalQty = rs.getInt("total_qty");
+                String productName = rs.getString("product_name");
+                model.addRow(new Object[]{rowNumber++, totalQty, productName}); // Add row number
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Optionally, you can show an error message to the user
+        }
+    }
+
+    private void updatePendapatan() {
+        Date dari = jDateChooserPendapatanDari.getDate();
+        Date sampai = jDateChooserPendapatanSampai.getDate();
+
+        if (dari == null || sampai == null) {
+            jLabelJumlahPendapatan.setText("0");
+            return;
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dariString = sdf.format(dari);
+        String sampaiString = sdf.format(sampai);
+
+        String query = "SELECT SUM(td.price) AS total_pendapatan "
+                + "FROM transaction_detail td "
+                + "JOIN `transaction` t ON td.id_transaction = t.id "
+                + "WHERE t.tanggal BETWEEN ? AND ?";
+
+        try (Connection conn = config.koneksi.Go(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, dariString);
+            pstmt.setString(2, sampaiString);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                double totalPendapatan = rs.getDouble("total_pendapatan");
+                // Format the total revenue in Rupiah
+                NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+                jLabelJumlahPendapatan.setText(formatRupiah.format(totalPendapatan));
+            } else {
+                jLabelJumlahPendapatan.setText("0");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            jLabelJumlahPendapatan.setText("Error: " + e.getMessage());
+        }
+    }
+    // Method to update the sales chart
+
+    private void updateGrafik() {
+        Date dari = jDateChooserGrafikDari.getDate();
+        Date sampai = jDateChooserGrafikSampai.getDate();
+
+        if (dari == null || sampai == null) {
+            jPanelGrafik.removeAll(); // Clear the panel if dates are not selected
+            jPanelGrafik.revalidate();
+            jPanelGrafik.repaint();
+            return;
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dariString = sdf.format(dari);
+        String sampaiString = sdf.format(sampai);
+
+        String query = "SELECT t.tanggal, SUM(td.price) AS total_penjualan "
+                + "FROM transaction_detail td "
+                + "JOIN `transaction` t ON td.id_transaction = t.id "
+                + "WHERE t.tanggal BETWEEN ? AND ? "
+                + "GROUP BY t.tanggal "
+                + "ORDER BY t.tanggal";
+
+        try (Connection conn = config.koneksi.Go(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, dariString);
+            pstmt.setString(2, sampaiString);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            // Create dataset for the chart
+            CategoryDataset dataset = createDataset(rs);
+
+            // Create the chart
+            JFreeChart chart = ChartFactory.createBarChart(
+                    "Grafik Penjualan", // Chart title
+                    "Tanggal", // X-axis label
+                    "Total Penjualan (Rp)", // Y-axis label
+                    dataset // Dataset
+            );
+
+            // Create a ChartPanel and add it to the jPanelGrafik
+            ChartPanel chartPanel = new ChartPanel(chart);
+            jPanelGrafik.removeAll(); // Clear previous chart
+            jPanelGrafik.add(chartPanel);
+            jPanelGrafik.revalidate();
+            jPanelGrafik.repaint();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Optionally, you can display an error message in the panel or log it
+        }
+    }
+
+/// Method to create dataset from ResultSet
+    private CategoryDataset createDataset(ResultSet rs) throws SQLException {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+        // Iterate through the ResultSet
+        while (rs.next()) {
+            // Get the date and total sales from the ResultSet
+            Date date = rs.getDate("tanggal");
+            double totalPenjualan = rs.getDouble("total_penjualan");
+
+            // Format the date to a string for the dataset
+            String formattedDate = new SimpleDateFormat("dd-MM-yyyy").format(date);
+
+            // Add the value to the dataset
+            dataset.addValue(totalPenjualan, "Penjualan", formattedDate);
+        }
+
+        return dataset;
+    }
+
+    private void updateRank() {
+    Date dari = jDateChooserRankDari.getDate();
+    Date sampai = jDateChooserRankSampai.getDate();
+
+    // Check if both dates are selected
+    if (dari == null || sampai == null) {
+        DefaultTableModel model = (DefaultTableModel) jTableRank.getModel();
+        model.setRowCount(0);
+        return;
+    }
+
+    // Format the dates to SQL format
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String dariString = sdf.format(dari);
+    String sampaiString = sdf.format(sampai);
+
+    // SQL query to get the rank of cashiers
+    String query = "SELECT u.fullname AS kasir, COUNT(t.id) AS jumlah_transaksi, SUM(td.qty) AS jumlah_produk " +
+                   "FROM users u " +
+                   "JOIN `transaction` t ON u.id = t.cashier_id " + // Use cashier_id
+                   "JOIN transaction_detail td ON t.id = td.id_transaction " +
+                   "WHERE t.tanggal BETWEEN ? AND ? " +
+                   "GROUP BY u.id " +
+                   "ORDER BY jumlah_transaksi DESC";
+
+    try (Connection conn = config.koneksi.Go(); 
+         PreparedStatement pstmt = conn.prepareStatement(query)) {
+        
+        pstmt.setString(1, dariString);
+        pstmt.setString(2, sampaiString);
+        
+        ResultSet rs = pstmt.executeQuery();
+        
+        // Clear the table before adding new data
+        DefaultTableModel model = (DefaultTableModel) jTableRank.getModel();
+        model.setRowCount(0); // Clear previous data
+        
+        int rowNumber = 1; // Initialize row number
+        while (rs.next()) {
+            String kasir = rs.getString("kasir");
+            int jumlahTransaksi = rs.getInt("jumlah_transaksi");
+            int jumlahProduk = rs.getInt("jumlah_produk");
+            model.addRow(new Object[]{rowNumber++, kasir, jumlahTransaksi, jumlahProduk}); // Add row number
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+    }
+}
+
 }

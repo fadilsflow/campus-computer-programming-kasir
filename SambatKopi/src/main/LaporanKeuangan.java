@@ -11,17 +11,21 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 public class LaporanKeuangan extends javax.swing.JFrame {
 
     private DefaultTableModel tableModel;
-
+    private Profile p;
     /**
      * Creates new form LaporanKeuangan
      */
     public LaporanKeuangan() {
         initComponents();
         loadLaporan();
+    }
+    public LaporanKeuangan(Profile P){
+        initComponents();
+        this.p = P;
+
     }
 
     /**
@@ -36,7 +40,7 @@ public class LaporanKeuangan extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnKembali = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -50,15 +54,15 @@ public class LaporanKeuangan extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Laporan Keuangan");
 
-        jButton1.setText("Kembali");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnKembali.setText("Kembali");
+        btnKembali.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnKembaliMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnKembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnKembaliActionPerformed(evt);
             }
         });
 
@@ -72,7 +76,7 @@ public class LaporanKeuangan extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnKembali)
                 .addGap(34, 34, 34))
         );
         jPanel1Layout.setVerticalGroup(
@@ -82,7 +86,7 @@ public class LaporanKeuangan extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                    .addComponent(btnKembali))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
@@ -106,21 +110,21 @@ public class LaporanKeuangan extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        KasirPage L = new KasirPage();
+    private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
+        KasirPage L = new KasirPage(p);
         L.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         L.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnKembaliActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        KasirPage L = new KasirPage();
+    private void btnKembaliMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnKembaliMouseClicked
+        KasirPage L = new KasirPage(p);
         L.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         L.setVisible(true);
 
-        this.dispose();    }//GEN-LAST:event_jButton1MouseClicked
+        this.dispose();    }//GEN-LAST:event_btnKembaliMouseClicked
 
     /**
      * @param args the command line arguments
@@ -158,7 +162,7 @@ public class LaporanKeuangan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnKembali;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
