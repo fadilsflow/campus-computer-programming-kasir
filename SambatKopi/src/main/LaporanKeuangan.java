@@ -25,6 +25,7 @@ public class LaporanKeuangan extends javax.swing.JFrame {
     public LaporanKeuangan(Profile P){
         initComponents();
         this.p = P;
+        loadLaporan();
 
     }
 

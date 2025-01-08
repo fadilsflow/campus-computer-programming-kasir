@@ -506,27 +506,11 @@ public class KasirPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLaporanKeuanganActionPerformed
 
     private void btnRiwayatTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRiwayatTransaksiMouseClicked
-        // Membuka JFrame LaporanKeuangan
-        RiwayatTransaksi RiwayatTransaksi = new RiwayatTransaksi(p);
 
-        // Mengatur JFrame LaporanKeuangan ke fullscreen
-        RiwayatTransaksi.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        RiwayatTransaksi.setVisible(true);
-
-        // Menutup JFrame KasirPage
-        this.dispose();
     }//GEN-LAST:event_btnRiwayatTransaksiMouseClicked
 
     private void btnLaporanKeuanganMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaporanKeuanganMouseClicked
-        // Membuka JFrame LaporanKeuangan
-        LaporanKeuangan laporanKeuangan = new LaporanKeuangan(p);
 
-        // Mengatur JFrame LaporanKeuangan ke fullscreen
-        laporanKeuangan.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        laporanKeuangan.setVisible(true);
-
-        // Menutup JFrame KasirPage
-        this.dispose(); // Menutup JFrame saat ini
     }//GEN-LAST:event_btnLaporanKeuanganMouseClicked
 
     /**

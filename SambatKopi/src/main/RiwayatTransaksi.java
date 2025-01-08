@@ -27,7 +27,7 @@ public class RiwayatTransaksi extends javax.swing.JFrame {
         public RiwayatTransaksi(Profile P){
         initComponents();
         this.p = P;
-
+        loadData();
     }
 
     /**
