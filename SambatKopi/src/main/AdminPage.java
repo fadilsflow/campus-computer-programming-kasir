@@ -682,11 +682,6 @@ public class AdminPage extends javax.swing.JFrame {
         T.setVisible(true);
     }//GEN-LAST:event_btnTambahUserActionPerformed
 
-    private void btnTambahProdukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahProdukActionPerformed
-        TambahProduk TP = new TambahProduk(this, true);
-        TP.setVisible(true); 
-    }//GEN-LAST:event_btnTambahProdukActionPerformed
-
     private void btnHapusprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusprodukActionPerformed
         int n = tblDataProduk.getSelectedRow();
         if(n != -1){
@@ -741,6 +736,11 @@ public class AdminPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Anda belum memilih data");
         }
     }//GEN-LAST:event_btnUbahProdukActionPerformed
+
+    private void btnTambahProdukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahProdukActionPerformed
+        TambahProduk TP = new TambahProduk(this, true);
+        TP.setVisible(true);
+    }//GEN-LAST:event_btnTambahProdukActionPerformed
 
     /**
      * @param args the command line arguments
