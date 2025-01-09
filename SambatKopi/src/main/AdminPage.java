@@ -849,7 +849,6 @@ public class AdminPage extends javax.swing.JFrame {
     // Reset semua panel ke warna default
     pnlDataUser.setBackground(defaultColor);
     pnlDataProduk.setBackground(defaultColor);
-    pnlDataTransaksi.setBackground(defaultColor);
     btnkeluar.setBackground(defaultColor);
 
     // Set warna panel yang diklik menjadi warna pilihan

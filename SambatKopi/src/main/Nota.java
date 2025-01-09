@@ -37,15 +37,15 @@ public class Nota extends JDialog {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(3, 2));
         
-        panel.add(new JLabel("Total Harga:"));
+        panel.add(new JLabel("      Total Harga:"));
         lblTotalHarga = new JLabel();
         panel.add(lblTotalHarga);
         
-        panel.add(new JLabel("Uang Pembayaran:"));
+        panel.add(new JLabel("      Uang Pembayaran:"));
         lblUangPembayaran = new JLabel();
         panel.add(lblUangPembayaran);
         
-        panel.add(new JLabel("Uang Kembali:"));
+        panel.add(new JLabel("      Uang Kembali:"));
         lblUangKembali = new JLabel();
         panel.add(lblUangKembali);
         
@@ -168,7 +168,7 @@ public class Nota extends JDialog {
                 // Print totals
                 g2d.drawString("Total Harga    : " + lblTotalHarga.getText(), 0, y);
                 y += lineHeight;
-                g2d.drawString("Pembayaran     : " + lblUangPembayaran.getText(), 0, y);
+                g2d.drawString("Pembayaran     : Rp." + lblUangPembayaran.getText(), 0, y);
                 y += lineHeight;
                 g2d.drawString("Kembalian      : " + lblUangKembali.getText(), 0, y);
                 y += lineHeight * 2;
