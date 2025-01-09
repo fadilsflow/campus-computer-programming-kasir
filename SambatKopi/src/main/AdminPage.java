@@ -64,8 +64,6 @@ public class AdminPage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         pnlDataProduk = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        pnlDataTransaksi = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         labelUser = new javax.swing.JLabel();
         btnkeluar = new javax.swing.JPanel();
@@ -190,44 +188,6 @@ public class AdminPage extends javax.swing.JFrame {
 
         jPanel2.add(pnlDataProduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 200, 50));
 
-        pnlDataTransaksi.setBackground(new java.awt.Color(42, 50, 38));
-        pnlDataTransaksi.setPreferredSize(new java.awt.Dimension(200, 40));
-        pnlDataTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnlDataTransaksiMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pnlDataTransaksiMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnlDataTransaksiMouseExited(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("JetBrains Mono", 0, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-transaction-list-28.png"))); // NOI18N
-        jLabel3.setText("      Data Transaksi");
-
-        javax.swing.GroupLayout pnlDataTransaksiLayout = new javax.swing.GroupLayout(pnlDataTransaksi);
-        pnlDataTransaksi.setLayout(pnlDataTransaksiLayout);
-        pnlDataTransaksiLayout.setHorizontalGroup(
-            pnlDataTransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDataTransaksiLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        pnlDataTransaksiLayout.setVerticalGroup(
-            pnlDataTransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDataTransaksiLayout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jPanel2.add(pnlDataTransaksi, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 200, 50));
-
         jLabel4.setFont(new java.awt.Font("JetBrains Mono", 0, 21)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-user-26.png"))); // NOI18N
@@ -273,7 +233,7 @@ public class AdminPage extends javax.swing.JFrame {
             .addComponent(btnLogout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        jPanel2.add(btnkeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 200, 50));
+        jPanel2.add(btnkeluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 200, 50));
 
         splitPane.setLeftComponent(jPanel2);
 
@@ -600,10 +560,6 @@ public class AdminPage extends javax.swing.JFrame {
         setActivePanel(pnlDataProduk);
     }//GEN-LAST:event_pnlDataProdukMouseClicked
 
-    private void pnlDataTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDataTransaksiMouseClicked
-        setActivePanel(pnlDataTransaksi);
-    }//GEN-LAST:event_pnlDataTransaksiMouseClicked
-
     private void btnkeluarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnkeluarMouseClicked
         setActivePanel(btnkeluar);
     }//GEN-LAST:event_btnkeluarMouseClicked
@@ -619,12 +575,6 @@ public class AdminPage extends javax.swing.JFrame {
                 pnlDataProduk.setBackground(hoverColor);
             }
     }//GEN-LAST:event_pnlDataProdukMouseEntered
-
-    private void pnlDataTransaksiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDataTransaksiMouseEntered
-        if (pnlDataTransaksi.getBackground() != activeColor) { // Ubah warna jika tidak aktif
-                pnlDataTransaksi.setBackground(hoverColor);
-            }
-    }//GEN-LAST:event_pnlDataTransaksiMouseEntered
 
     private void btnkeluarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnkeluarMouseEntered
         if (btnkeluar.getBackground() != activeColor) { // Ubah warna jika tidak aktif
@@ -643,12 +593,6 @@ public class AdminPage extends javax.swing.JFrame {
                 pnlDataProduk.setBackground(defaultColor);
         }
     }//GEN-LAST:event_pnlDataProdukMouseExited
-
-    private void pnlDataTransaksiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDataTransaksiMouseExited
-        if (pnlDataTransaksi.getBackground() != activeColor) { // Kembali ke warna default jika tidak aktif
-                pnlDataTransaksi.setBackground(defaultColor);
-        }
-    }//GEN-LAST:event_pnlDataTransaksiMouseExited
 
     private void btnkeluarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnkeluarMouseExited
         if (btnkeluar.getBackground() != activeColor) { // Kembali ke warna default jika tidak aktif
@@ -790,7 +734,6 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JPanel btnkeluar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -808,7 +751,6 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JPanel pnlCard1;
     private javax.swing.JPanel pnlCard2;
     private javax.swing.JPanel pnlDataProduk;
-    private javax.swing.JPanel pnlDataTransaksi;
     private javax.swing.JPanel pnlDataUser;
     private javax.swing.JSplitPane splitPane;
     private javax.swing.JTable tblDataProduk;

@@ -44,7 +44,6 @@ public class LoginPage extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnclose = new javax.swing.JLabel();
@@ -134,11 +133,6 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8-password-28.png"))); // NOI18N
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 30, 80));
 
-        jLabel5.setFont(new java.awt.Font("JetBrains Mono", 0, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Forget Password?");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, -1, -1));
-
         btnLogin.setFont(new java.awt.Font("Roboto Medium", 0, 12)); // NOI18N
         btnLogin.setForeground(new java.awt.Color(48, 25, 39));
         btnLogin.setText("Log In");
@@ -148,7 +142,7 @@ public class LoginPage extends javax.swing.JFrame {
                 btnLoginActionPerformed(evt);
             }
         });
-        jPanel3.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 70, 30));
+        jPanel3.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 70, 30));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("JetBrains Mono", 0, 18)); // NOI18N
@@ -262,7 +256,6 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
