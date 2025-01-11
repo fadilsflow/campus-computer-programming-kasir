@@ -131,6 +131,7 @@ public class OwnerPage extends javax.swing.JFrame {
         jLabel21 = new javax.swing.JLabel();
         jDateChooserRankSampai = new com.toedter.calendar.JDateChooser();
         jDateChooserRankDari = new com.toedter.calendar.JDateChooser();
+        jScrollPane2 = new javax.swing.JScrollPane();
         jTableRank = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -790,7 +791,9 @@ public class OwnerPage extends javax.swing.JFrame {
                 "Nomor", "Nama", "Jumlah transaksi", "Jumlah Barang"
             }
         ));
-        card6.add(jTableRank, java.awt.BorderLayout.CENTER);
+        jScrollPane2.setViewportView(jTableRank);
+
+        card6.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         Cards.add(card6, "card6");
 
@@ -1111,6 +1114,7 @@ public class OwnerPage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JPanel jPanelGrafik;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JTable jTableRank;
     private javax.swing.JTable jTableTerlaris;

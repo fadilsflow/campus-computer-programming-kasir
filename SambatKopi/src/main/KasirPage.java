@@ -717,7 +717,6 @@ public class KasirPage extends javax.swing.JFrame {
 
     private void btnLaporanRiwayatMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaporanRiwayatMousePressed
         cardLayout.show(Cards, "card4");
-        System.out.println("Switching to pnlCardTransaksin");
     }//GEN-LAST:event_btnLaporanRiwayatMousePressed
 
     private void btnLaporanKeuangan1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaporanKeuangan1MouseClicked
@@ -738,7 +737,6 @@ public class KasirPage extends javax.swing.JFrame {
 
     private void btnLaporanKeuangan1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLaporanKeuangan1MousePressed
         cardLayout.show(Cards, "card3");
-        System.out.println("card3");
     }//GEN-LAST:event_btnLaporanKeuangan1MousePressed
 
     private void btnPembelianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPembelianMouseClicked
@@ -759,7 +757,6 @@ public class KasirPage extends javax.swing.JFrame {
 
     private void btnPembelianMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPembelianMousePressed
         cardLayout.show(Cards, "card2");
-        System.out.println("Switching to pnlCardPembelian");
     }//GEN-LAST:event_btnPembelianMousePressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
