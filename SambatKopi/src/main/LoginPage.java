@@ -303,7 +303,7 @@ public class LoginPage extends javax.swing.JFrame {
                     this.setVisible(false);
                     O.setVisible(true);
                 } else if (P.getLevel().equals("owner")) {
-                    Owner O = new Owner(P);
+                    OwnerPage O = new OwnerPage(P);
                     O.setExtendedState(Frame.MAXIMIZED_BOTH);
                     this.setVisible(false);
                     O.setVisible(true);
