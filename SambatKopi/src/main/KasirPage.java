@@ -28,6 +28,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class KasirPage extends javax.swing.JFrame {
 
+    static DefaultTableModel mod_p;
+
     CardLayout cardLayout;
     Profile p;
     DefaultTableModel tableModel;
@@ -49,11 +51,24 @@ public class KasirPage extends javax.swing.JFrame {
         initComponents();
         cardLayout = (CardLayout) (Cards.getLayout());
         this.p = P;
+        mod_p = new DefaultTableModel();
+        tblproduk.setModel(mod_p);
+
+        //
+        // Menambahkan kolom ke tabel
+        mod_p.setColumnIdentifiers(new Object[]{"No", "Code", "Name"});
+
+        // Memuat data produk
+        viewDataProduk("");
         lblRole.setText(p.getLevel());
         lblUser.setText(p.getFullname());
-
+        // Atur ukuran kolom
+        tblproduk.getColumnModel().getColumn(0).setPreferredWidth(50); // Kolom "No"
+        tblproduk.getColumnModel().getColumn(1).setPreferredWidth(100); // Kolom "Product Code"
+        tblproduk.getColumnModel().getColumn(2).setPreferredWidth(200); // Kolom "Product Name"
         loadLaporan();
         loadData();
+
 
     }
 
@@ -96,8 +111,12 @@ public class KasirPage extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCart = new javax.swing.JTable();
+        scrolpane = new javax.swing.JScrollPane();
+        tblproduk = new javax.swing.JTable();
         card3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -307,7 +326,7 @@ public class KasirPage extends javax.swing.JFrame {
 
         Cards.setLayout(new java.awt.CardLayout());
 
-        card2.setLayout(new java.awt.BorderLayout());
+        card2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(42, 50, 38));
 
@@ -372,6 +391,17 @@ public class KasirPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel15.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setText("Daftar Pembelian");
+        jLabel15.setToolTipText("");
+
+        jLabel16.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("Daftar Produk");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -392,18 +422,25 @@ public class KasirPage extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(lblKembali, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                                .addComponent(lblKembali, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                                 .addGap(455, 455, 455))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(lblTotalHarga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(lblTotalHarga, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())))))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel16)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(jButton2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,27 +449,31 @@ public class KasirPage extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(lblTotalHarga))
-                                .addGap(11, 11, 11)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(11, 11, 11)
-                                .addComponent(jLabel9))
-                            .addComponent(lblKembali, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(14, 14, 14))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel5)
+                                .addComponent(lblTotalHarga))
+                            .addGap(11, 11, 11)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel8)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(11, 11, 11)
+                            .addComponent(jLabel9))
+                        .addComponent(lblKembali, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel16))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        card2.add(jPanel3, java.awt.BorderLayout.PAGE_START);
+        card2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 220));
+
+        jScrollPane1.setFont(new java.awt.Font("Helvetica Neue", 0, 12)); // NOI18N
 
         tblCart.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         tblCart.setModel(new javax.swing.table.DefaultTableModel(
@@ -453,7 +494,25 @@ public class KasirPage extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblCart);
 
-        card2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        card2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 224, 744, 450));
+
+        tblproduk.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "No", "Kode", "Nama"
+            }
+        ));
+        scrolpane.setViewportView(tblproduk);
+        if (tblproduk.getColumnModel().getColumnCount() > 0) {
+            tblproduk.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        card2.add(scrolpane, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 224, 292, 450));
 
         Cards.add(card2, "card2");
 
@@ -471,14 +530,14 @@ public class KasirPage extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1023, Short.MAX_VALUE)
+            .addGap(0, 1042, Short.MAX_VALUE)
             .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup()
                     .addGap(301, 301, 301)
                     .addComponent(jLabel11)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jLabel12)
-                    .addContainerGap(480, Short.MAX_VALUE)))
+                    .addContainerGap(499, Short.MAX_VALUE)))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -533,14 +592,14 @@ public class KasirPage extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1023, Short.MAX_VALUE)
+            .addGap(0, 1042, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel7Layout.createSequentialGroup()
                     .addGap(295, 295, 295)
                     .addComponent(jLabel13)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jLabel6)
-                    .addContainerGap(473, Short.MAX_VALUE)))
+                    .addContainerGap(492, Short.MAX_VALUE)))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -918,6 +977,8 @@ public class KasirPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -944,7 +1005,9 @@ public class KasirPage extends javax.swing.JFrame {
     private javax.swing.JLabel lblRole;
     private javax.swing.JLabel lblTotalHarga;
     private javax.swing.JLabel lblUser;
+    private javax.swing.JScrollPane scrolpane;
     private javax.swing.JTable tblCart;
+    private javax.swing.JTable tblproduk;
     private javax.swing.JTextField txtID;
     // End of variables declaration//GEN-END:variables
 
@@ -1034,6 +1097,37 @@ public class KasirPage extends javax.swing.JFrame {
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+// Fungsi untuk menampilkan data
+    public static void viewDataProduk(String where) {
+        try {
+            // Menghapus data lama
+            for (int i = mod_p.getRowCount() - 1; i >= 0; i--) {
+                mod_p.removeRow(i);
+            }
+
+            Connection K = koneksi.Go();
+            Statement S = K.createStatement();
+            String Q = "SELECT product_code, product_name FROM products " + where;
+
+            ResultSet R = S.executeQuery(Q);
+            int no = 1;
+            while (R.next()) {
+                String p_code = R.getString("product_code");
+                String p_name = R.getString("product_name");
+
+                // Menambahkan baris ke tabel
+                Object[] D = {no, p_code, p_name};
+                mod_p.addRow(D);
+
+                no++;
+            }
+
+            functions.saveLog("Sukses menampilkan data produk");
+        } catch (SQLException e) {
+            functions.saveLog("Gagal menampilkan data produk. " + e.getMessage());
         }
     }
 

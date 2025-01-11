@@ -8,6 +8,7 @@ import config.koneksi;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.sql.Connection;
+import java.util.Objects;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,38 +16,37 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
-
 public class AdminPage extends javax.swing.JFrame {
 
     private CardLayout cardLayout;
     Profile p;
     static DefaultTableModel m, mod_p;
-    
+
     Color defaultColor = new Color(42, 50, 38); // Warna latar gelap
-    Color activeColor = new Color(62,66,62); // Warna pilihan (highlight)
-    Color hoverColor = new Color(62,66,62);
-    
+    Color activeColor = new Color(62, 66, 62); // Warna pilihan (highlight)
+    Color hoverColor = new Color(62, 66, 62);
+
     public AdminPage() {
         initComponents();
-        
-        settingTable();  
+
+        settingTable();
         viewData("");
-        cardLayout = (CardLayout)(pnlCard.getLayout());
-        viewDataProduk(""); 
+        cardLayout = (CardLayout) (pnlCard.getLayout());
+        viewDataProduk("");
     }
-    
+
     public AdminPage(Profile P) {
         initComponents();
-        
-        
+
         this.p = P;
         labelUser.setText(p.getFullname() + "(" + p.getLevel() + ")");
-        cardLayout = (CardLayout)(pnlCard.getLayout());
-        settingTable();  
+        cardLayout = (CardLayout) (pnlCard.getLayout());
+        settingTable();
         viewData("");
-        viewDataProduk(""); 
+        viewDataProduk("");
+        System.out.println("Jumlah kolom: " + tblDataProduk.getColumnCount());
+        System.out.println("Jumlah baris: " + tblDataProduk.getRowCount());
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -478,8 +478,8 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
 
-    splitPane.setEnabled(false); // Menonaktifkan kemampuan menggeser divider
-    splitPane.setDividerSize(0); // Menyembunyikan divider (opsional)
+        splitPane.setEnabled(false); // Menonaktifkan kemampuan menggeser divider
+        splitPane.setDividerSize(0); // Menyembunyikan divider (opsional)
 
     }//GEN-LAST:event_formWindowOpened
 
@@ -492,58 +492,58 @@ public class AdminPage extends javax.swing.JFrame {
     }//GEN-LAST:event_pnlDataUserMousePressed
 
     private void btnRefreshProdukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshProdukActionPerformed
-        viewDataProduk(""); 
+        viewDataProduk("");
     }//GEN-LAST:event_btnRefreshProdukActionPerformed
 
     private void btnkeluarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnkeluarMousePressed
-        int option = JOptionPane.showConfirmDialog(this, 
-        "Apakah Anda yakin ingin keluar?", "Konfirmasi Logout", 
-        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-    
-    // Jika pengguna memilih Yes
-    if (option == JOptionPane.YES_OPTION) {
-        // Tampilkan form login dan sembunyikan form utama
-        LoginPage login = new LoginPage();
-        login.setVisible(true); // Tampilkan LoginForm
-        this.dispose(); // Tutup MainForm
-    }
+        int option = JOptionPane.showConfirmDialog(this,
+                "Apakah Anda yakin ingin keluar?", "Konfirmasi Logout",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        // Jika pengguna memilih Yes
+        if (option == JOptionPane.YES_OPTION) {
+            // Tampilkan form login dan sembunyikan form utama
+            LoginPage login = new LoginPage();
+            login.setVisible(true); // Tampilkan LoginForm
+            this.dispose(); // Tutup MainForm
+        }
     }//GEN-LAST:event_btnkeluarMousePressed
 
     private void txtKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKeyActionPerformed
         String key = txtKey.getText();
         String where = "WHERE "
-        + "fullname LIKE '%" + key + "%' OR "
-        + "username LIKE '%" + key + "%' OR "
-        + "password LIKE '%" + key + "%' OR "
-        + "level LIKE '%" + key + "%'";
+                + "fullname LIKE '%" + key + "%' OR "
+                + "username LIKE '%" + key + "%' OR "
+                + "password LIKE '%" + key + "%' OR "
+                + "level LIKE '%" + key + "%'";
         viewData(where);
     }//GEN-LAST:event_txtKeyActionPerformed
 
     private void btnHapusDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusDataActionPerformed
         int n = tbluser.getSelectedRow();
-        if(n != -1){
+        if (n != -1) {
             int id = Integer.parseInt(tbluser.getValueAt(n, 1).toString());
             String fullname = tbluser.getValueAt(n, 2).toString();
 
             int opsi = JOptionPane.showConfirmDialog(this,
-                "Apakah Anda yakin ingin menghapus data "+fullname+"?",
-                "Hapus Data",
-                JOptionPane.YES_NO_OPTION);
-            if(opsi == 0){
+                    "Apakah Anda yakin ingin menghapus data " + fullname + "?",
+                    "Hapus Data",
+                    JOptionPane.YES_NO_OPTION);
+            if (opsi == 0) {
                 String Q = "DELETE FROM users "
-                + "WHERE id="+id;
+                        + "WHERE id=" + id;
 
                 try {
                     Connection K = koneksi.Go();
                     Statement S = K.createStatement();
                     S.executeUpdate(Q);
                     viewData("");
-                    JOptionPane.showMessageDialog(this, "Data "+fullname+" telah terhapus");
+                    JOptionPane.showMessageDialog(this, "Data " + fullname + " telah terhapus");
                 } catch (SQLException e) {
                 }
             }
 
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "Anda belum memilih data");
         }
     }//GEN-LAST:event_btnHapusDataActionPerformed
@@ -566,43 +566,43 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void pnlDataUserMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDataUserMouseEntered
         if (pnlDataUser.getBackground() != activeColor) { // Ubah warna jika tidak aktif
-                pnlDataUser.setBackground(hoverColor);
-            }
+            pnlDataUser.setBackground(hoverColor);
+        }
     }//GEN-LAST:event_pnlDataUserMouseEntered
 
     private void pnlDataProdukMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDataProdukMouseEntered
         if (pnlDataProduk.getBackground() != activeColor) { // Ubah warna jika tidak aktif
-                pnlDataProduk.setBackground(hoverColor);
-            }
+            pnlDataProduk.setBackground(hoverColor);
+        }
     }//GEN-LAST:event_pnlDataProdukMouseEntered
 
     private void btnkeluarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnkeluarMouseEntered
         if (btnkeluar.getBackground() != activeColor) { // Ubah warna jika tidak aktif
-               btnkeluar.setBackground(hoverColor);
-            }
+            btnkeluar.setBackground(hoverColor);
+        }
     }//GEN-LAST:event_btnkeluarMouseEntered
 
     private void pnlDataUserMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDataUserMouseExited
         if (pnlDataUser.getBackground() != activeColor) { // Kembali ke warna default jika tidak aktif
-                pnlDataUser.setBackground(defaultColor);
+            pnlDataUser.setBackground(defaultColor);
         }
     }//GEN-LAST:event_pnlDataUserMouseExited
 
     private void pnlDataProdukMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDataProdukMouseExited
         if (pnlDataProduk.getBackground() != activeColor) { // Kembali ke warna default jika tidak aktif
-                pnlDataProduk.setBackground(defaultColor);
+            pnlDataProduk.setBackground(defaultColor);
         }
     }//GEN-LAST:event_pnlDataProdukMouseExited
 
     private void btnkeluarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnkeluarMouseExited
         if (btnkeluar.getBackground() != activeColor) { // Kembali ke warna default jika tidak aktif
-                btnkeluar.setBackground(defaultColor);
+            btnkeluar.setBackground(defaultColor);
         }
     }//GEN-LAST:event_btnkeluarMouseExited
 
     private void btnUbahDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahDataActionPerformed
-       int n = tbluser.getSelectedRow();
-        if(n != -1){
+        int n = tbluser.getSelectedRow();
+        if (n != -1) {
             int id = Integer.parseInt(tbluser.getValueAt(n, 1).toString());
             String fullname = tbluser.getValueAt(n, 2).toString();
             String username = tbluser.getValueAt(n, 3).toString();
@@ -616,7 +616,7 @@ public class AdminPage extends javax.swing.JFrame {
             U.setLevel(level);
             U.setVisible(true);
 
-        }else {
+        } else {
             JOptionPane.showMessageDialog(this, "Anda belum memilih data");
         }
     }//GEN-LAST:event_btnUbahDataActionPerformed
@@ -628,29 +628,29 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void btnHapusprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusprodukActionPerformed
         int n = tblDataProduk.getSelectedRow();
-        if(n != -1){
+        if (n != -1) {
             int id = Integer.parseInt(tblDataProduk.getValueAt(n, 1).toString());
             String kode = tblDataProduk.getValueAt(n, 2).toString() + " - " + tblDataProduk.getValueAt(n, 3).toString();
-            
-            int opsi = JOptionPane.showConfirmDialog(this, 
-                    "Apakah Anda yakin ingin menghapus data "+kode+"?", 
-                    "Hapus Data", 
+
+            int opsi = JOptionPane.showConfirmDialog(this,
+                    "Apakah Anda yakin ingin menghapus data " + kode + "?",
+                    "Hapus Data",
                     JOptionPane.YES_NO_OPTION);
-            if(opsi == 0){
+            if (opsi == 0) {
                 String Q = "DELETE FROM produk "
-                        + "WHERE id="+id;
-                
+                        + "WHERE id=" + id;
+
                 try {
                     Connection K = koneksi.Go();
                     Statement S = K.createStatement();
                     S.executeUpdate(Q);
-                    viewDataProduk(""); 
-                    JOptionPane.showMessageDialog(this, "Data "+kode+" telah terhapus");
+                    viewDataProduk("");
+                    JOptionPane.showMessageDialog(this, "Data " + kode + " telah terhapus");
                 } catch (SQLException e) {
                 }
             }
-            
-    }else {
+
+        } else {
             JOptionPane.showMessageDialog(this, "Anda belum memilih data");
         }
     }//GEN-LAST:event_btnHapusprodukActionPerformed
@@ -663,22 +663,52 @@ public class AdminPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void btnUbahProdukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahProdukActionPerformed
-        int n = tblDataProduk.getSelectedRow();
-        if(n != -1){
+   int n = tblDataProduk.getSelectedRow();
+    if (n != -1) {
+        try {
+            // Debug: Cetak semua nilai dari baris yang dipilih
+            for (int i = 0; i < tblDataProduk.getColumnCount(); i++) {
+                System.out.println("Kolom " + tblDataProduk.getColumnName(i) + ": " + 
+                                   tblDataProduk.getValueAt(n, i));
+            }
+
             UbahProduk U = new UbahProduk(this, true);
-            U.setId(Integer.parseInt(tblDataProduk.getValueAt(n, 1).toString()));
-            U.setKode(tblDataProduk.getValueAt(n, 2).toString());
-            U.setNama(tblDataProduk.getValueAt(n, 3).toString());
-            U.setGambar(tblDataProduk.getValueAt(n, 4).toString());
-            U.setKategori(tblDataProduk.getValueAt(n, 5).toString());
-            U.setSuplier(tblDataProduk.getValueAt(n, 6).toString());
-            U.setHargaJual(Double.parseDouble(tblDataProduk.getValueAt(n, 7).toString()));
-            U.setHargaBeli(Double.parseDouble(tblDataProduk.getValueAt(n, 8).toString()));
-            U.setStok(Integer.parseInt(tblDataProduk.getValueAt(n, 9).toString()));
-            U.setVisible(true); 
-        }else {
-            JOptionPane.showMessageDialog(this, "Anda belum memilih data");
+            
+            // Pastikan setiap setValue dilakukan dengan pengecekan null
+            U.setId(Integer.parseInt(
+                Objects.toString(tblDataProduk.getValueAt(n, 1), "0")
+            ));
+            
+            U.setKode(Objects.toString(tblDataProduk.getValueAt(n, 2), ""));
+            U.setNama(Objects.toString(tblDataProduk.getValueAt(n, 3), ""));
+            U.setGambar(Objects.toString(tblDataProduk.getValueAt(n, 4), ""));
+            U.setKategori(Objects.toString(tblDataProduk.getValueAt(n, 5), ""));
+            U.setSuplier(Objects.toString(tblDataProduk.getValueAt(n, 6), ""));
+            
+            // Konversi dengan penanganan null
+            U.setHargaJual(Double.parseDouble(
+                Objects.toString(tblDataProduk.getValueAt(n, 7), "0")
+            ));
+            
+            U.setHargaBeli(Double.parseDouble(
+                Objects.toString(tblDataProduk.getValueAt(n, 8), "0")
+            ));
+            
+            U.setStok(Integer.parseInt(
+                Objects.toString(tblDataProduk.getValueAt(n, 9), "0")
+            ));
+            
+            U.setVisible(true);
+        } catch (Exception e) {
+            // Tangkap dan cetak error untuk debugging
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, 
+                "Terjadi kesalahan saat memuat data: " + e.getMessage(), 
+                "Error", JOptionPane.ERROR_MESSAGE);
         }
+    } else {
+        JOptionPane.showMessageDialog(this, "Anda belum memilih data");
+    }        
     }//GEN-LAST:event_btnUbahProdukActionPerformed
 
     private void btnTambahProdukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahProdukActionPerformed
@@ -761,7 +791,7 @@ public class AdminPage extends javax.swing.JFrame {
     public static void viewData(String where) {
         try {
             //kode kita
-            for (int i = m.getRowCount()-1; i >=0; i--) {
+            for (int i = m.getRowCount() - 1; i >= 0; i--) {
                 m.removeRow(i);
             }
 
@@ -787,46 +817,47 @@ public class AdminPage extends javax.swing.JFrame {
             //error handling
         }
     }
-    
+
     public static void viewDataProduk(String where) {
         try {
-            for (int i = mod_p.getRowCount()-1; i >=0; i--){
+            for (int i = mod_p.getRowCount() - 1; i >= 0; i--) {
                 mod_p.removeRow(i);
             }
-            
-            Connection K = koneksi.Go(); 
+
+            Connection K = koneksi.Go();
             Statement S = K.createStatement();
-             String Q = "SELECT * FROM products " + where;
+            String Q = "SELECT * FROM products " + where;
 
             ResultSet R = S.executeQuery(Q);
             int no = 1;
-            while (R.next()){
+            while (R.next()) {
                 int id = R.getInt("id");
                 String p_code = R.getString("product_code");
                 String p_name = R.getString("product_name");
                 String p_image = R.getString("product_image");
-                String p_category  = R.getString("product_category");
+                String p_category = R.getString("product_category");
                 String p_supplier = R.getString("product_supplier");
                 String p_price_s = R.getString("product_price_s");
                 String p_price_b = R.getString("product_price_s");
                 String p_stock = R.getString("product_stock");
 
                 Object[] D = {
-                    no, id, p_code,p_name, p_image, 
+                    no, id, p_code, p_name, p_image,
                     p_category, p_supplier, p_price_s, p_price_b, p_stock};
                 mod_p.addRow(D);
 
-            no++;
+                no++;
+            }
+
+            functions.saveLog("Sukses menampilkan data produk");
+        } catch (SQLException e) {
+            // Penanganan error
+            functions.saveLog("Gagal menampilkan data produk. " + e.getMessage());
         }
-        
-        functions.saveLog("Sukses menampilkan data produk"); 
-    } catch (SQLException e) {
-        // Penanganan error
-        functions.saveLog("Gagal menampilkan data produk. " + e.getMessage()); 
     }
-    }    
+
     private void settingTable() {
-        m = (DefaultTableModel) tbluser.getModel();        
+        m = (DefaultTableModel) tbluser.getModel();
         tbluser.getColumnModel().getColumn(0).setMinWidth(50);
         tbluser.getColumnModel().getColumn(0).setMaxWidth(70);
 
@@ -835,23 +866,22 @@ public class AdminPage extends javax.swing.JFrame {
 
         tbluser.getColumnModel().getColumn(2).setMinWidth(350);
         tbluser.getColumnModel().getColumn(2).setMaxWidth(500);
-        
-        mod_p = (DefaultTableModel) tblDataProduk.getModel();        
+
+        mod_p = (DefaultTableModel) tblDataProduk.getModel();
         tblDataProduk.getColumnModel().getColumn(0).setMinWidth(50);
         tblDataProduk.getColumnModel().getColumn(0).setMaxWidth(70);
 
         tblDataProduk.getColumnModel().getColumn(1).setMinWidth(0);
-        tblDataProduk.getColumnModel().getColumn(1).setMaxWidth(0); 
+        tblDataProduk.getColumnModel().getColumn(1).setMaxWidth(0);
     }
-    
-    
-    private void setActivePanel(JPanel activePanel) {
-    // Reset semua panel ke warna default
-    pnlDataUser.setBackground(defaultColor);
-    pnlDataProduk.setBackground(defaultColor);
-    btnkeluar.setBackground(defaultColor);
 
-    // Set warna panel yang diklik menjadi warna pilihan
-    activePanel.setBackground(activeColor);
-}
+    private void setActivePanel(JPanel activePanel) {
+        // Reset semua panel ke warna default
+        pnlDataUser.setBackground(defaultColor);
+        pnlDataProduk.setBackground(defaultColor);
+        btnkeluar.setBackground(defaultColor);
+
+        // Set warna panel yang diklik menjadi warna pilihan
+        activePanel.setBackground(activeColor);
+    }
 }

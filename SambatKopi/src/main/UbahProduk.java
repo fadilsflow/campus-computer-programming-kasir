@@ -30,7 +30,7 @@ public class UbahProduk extends javax.swing.JDialog {
     private double hargaJual;
     private double hargaBeli;
     private int stok;
-    
+
     public int getId() {
         return id;
     }
@@ -102,13 +102,15 @@ public class UbahProduk extends javax.swing.JDialog {
     public void setStok(int stok) {
         this.stok = stok;
     }
-    
+
     public UbahProduk(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         showKategoriProduk();
         showSupplier();
+
+
     }
 
     /**
@@ -235,9 +237,7 @@ public class UbahProduk extends javax.swing.JDialog {
             }
         });
 
-        cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Makanan", "Minuman", "Snack", " " }));
-
-        cmbSuplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Indomie", "Aqua", "Nabati" }));
+        cmbKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         jLabel9.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -359,11 +359,11 @@ public class UbahProduk extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         JFileChooser jfc = new JFileChooser();
-        jfc.setDialogTitle("Pilih Gambar"); 
+        jfc.setDialogTitle("Pilih Gambar");
         int x = jfc.showOpenDialog(this);
-        if(x == JFileChooser.APPROVE_OPTION){
+        if (x == JFileChooser.APPROVE_OPTION) {
             File f = jfc.getSelectedFile();
-            txtGambar.setText(f.getAbsolutePath()); 
+            txtGambar.setText(f.getAbsolutePath());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -375,37 +375,68 @@ public class UbahProduk extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
             Connection K = koneksi.Go();
-            String Q = "UPDATE produk SET "
-                    + "kode = ?, "
-                    + "nama = ?, "
-                    + "gambar = ?, "
-                    + "kategori = ?, "
-                    + "suplier = ?, "
-                    + "harga_jual = ?, "
-                    + "harga_beli = ?, "
-                    + "stok = ? "
+            String Q = "UPDATE products SET "
+                    + "product_code = ?, "
+                    + "product_name = ?, "
+                    + "product_image = ?, "
+                    + "product_category = ?, "
+                    + "product_supplier = ?, "
+                    + "product_price_s = ?, "
+                    + "product_price_b = ?, "
+                    + "product_stock = ? "
                     + "WHERE id = ?";
-            //System.out.println(Q);
+
             PreparedStatement ps = K.prepareStatement(Q);
+
+            // Mengambil nilai dari input teks
             ps.setString(1, txtKode.getText());
             ps.setString(2, txtNama.getText());
             ps.setString(3, txtGambar.getText());
-            String[] X = cmbKategori.getSelectedItem().toString().split(" - ");
-            String[] Y = cmbSuplier.getSelectedItem().toString().split(" - ");
-            ps.setString(4,X[1]); 
-            ps.setString(5,Y[1]); 
-            ps.setDouble(6,Double.parseDouble(txtHargaJual.getText())); 
-            ps.setDouble(7,Double.parseDouble(txtHargaBeli.getText())); 
-            ps.setInt(8,Integer.parseInt(txtStok.getText())); 
+
+            // Memproses kategori dan supplier
+            String selectedKategori = cmbKategori.getSelectedItem().toString();
+            String selectedSupplier = cmbSuplier.getSelectedItem().toString();
+
+            String[] X = selectedKategori.split("-");
+            String[] Y = selectedSupplier.split("-");
+
+            // Validasi kategori
+            if (X.length > 1) {
+                ps.setString(4, X[1].trim());
+            } else {
+                JOptionPane.showMessageDialog(this, "Kategori tidak valid", "Error", JOptionPane.ERROR_MESSAGE);
+                return; // Keluar jika kategori tidak valid
+            }
+
+            // Validasi supplier
+            if (Y.length > 1) {
+                ps.setString(5, Y[1].trim());
+            } else {
+                JOptionPane.showMessageDialog(this, "Supplier tidak valid", "Error", JOptionPane.ERROR_MESSAGE);
+                return; // Keluar jika supplier tidak valid
+            }
+
+            // Mengisi harga dan stok
+            ps.setDouble(6, Double.parseDouble(txtHargaJual.getText()));
+            ps.setDouble(7, Double.parseDouble(txtHargaBeli.getText()));
+            ps.setInt(8, Integer.parseInt(txtStok.getText()));
+
+            // ID produk untuk update
             ps.setInt(9, id);
+
+            // Eksekusi query
             ps.executeUpdate();
+
+            // Refresh data dan tutup form
             AdminPage.viewDataProduk("");
-            JOptionPane.showMessageDialog(this, "Data berhasil disimpan");
+            JOptionPane.showMessageDialog(this, "Data berhasil diperbarui");
             this.setVisible(false);
             this.dispose();
+
         } catch (NumberFormatException | SQLException e) {
             JOptionPane.showMessageDialog(this, "Terjadi Kesalahan [EP-463]:\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtHargaJualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHargaJualKeyTyped
@@ -426,26 +457,36 @@ public class UbahProduk extends javax.swing.JDialog {
     }//GEN-LAST:event_CloseDialog
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        txtKode.setText(getKode());
-        txtNama.setText(getNama());
-        txtGambar.setText(getGambar());
-        for (int i = 0; i < cmbKategori.getItemCount(); i++) {
-            String[] item = cmbKategori.getItemAt(i).toString().split(" - ");
-            if (item[1].equals(getKategori())) {
-                cmbKategori.setSelectedIndex(i);
-                break;
-            }
+    txtKode.setText(getKode());
+    txtNama.setText(getNama());
+    txtGambar.setText(getGambar());
+    
+  
+    // Untuk Kategori
+    for (int i = 0; i < cmbKategori.getItemCount(); i++) {
+        String kategoriItem = cmbKategori.getItemAt(i);
+        String[] item = kategoriItem.split("-");
+        if (item.length > 1 && item[1].trim().equals(getKategori())) {
+            cmbKategori.setSelectedIndex(i);
+            break;
         }
-        for (int i = 0; i < cmbSuplier.getItemCount(); i++) {
-            String[] item = cmbSuplier.getItemAt(i).toString().split(" - ");
-            if (item[1].equals(getSuplier())) {
-                cmbSuplier.setSelectedIndex(i);
-                break;
-            }
+    }
+    
+    // Untuk Supplier
+    for (int i = 0; i < cmbSuplier.getItemCount(); i++) {
+        String suplierItem = cmbSuplier.getItemAt(i);
+        String[] item = suplierItem.split("-");
+        if (item.length > 1 && item[1].trim().equals(getSuplier())) {
+            cmbSuplier.setSelectedIndex(i);
+            break;
         }
-        txtHargaJual.setText(String.valueOf(getHargaJual()));
-        txtHargaBeli.setText(String.valueOf(getHargaBeli()));
-        txtStok.setText(String.valueOf(getStok()));
+    }
+    
+    // Pastikan nilai tidak null sebelum set
+    txtHargaJual.setText(String.valueOf(getHargaJual() != 0 ? getHargaJual() : ""));
+    txtHargaBeli.setText(String.valueOf(getHargaBeli() != 0 ? getHargaBeli() : ""));
+    txtStok.setText(String.valueOf(getStok() != 0 ? getStok() : ""));
+
     }//GEN-LAST:event_formWindowOpened
 
     private void txtHargaJualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHargaJualActionPerformed
@@ -520,41 +561,41 @@ public class UbahProduk extends javax.swing.JDialog {
     private javax.swing.JTextField txtStok;
     // End of variables declaration//GEN-END:variables
 
-    private void showKategoriProduk(){
+    private void showKategoriProduk() {
         try {
             Connection K = koneksi.Go();
             Statement S = K.createStatement();
-            String Q = "SELECT id_kategori,kategori FROM kategori";
+            String Q = "SELECT id,name FROM product_category";
             ResultSet R = S.executeQuery(Q);
             cmbKategori.removeAllItems();
-            while (R.next()) {                 
-                int id = R.getInt("id_kategori");
-                String name = R.getString("kategori");
-                cmbKategori.addItem(id+" - "+name);
-            } 
-        } catch (SQLException e) {
+            while (R.next()) {
+                int id = R.getInt("id");
+                String name = R.getString("name");
+                cmbKategori.addItem(id + "-" + name);
+            }
+        } catch (Exception e) {
         }
     }
-    
-    private void showSupplier(){
+
+    private void showSupplier() {
         try {
             Connection K = koneksi.Go();
             Statement S = K.createStatement();
-            String Q = "SELECT id_suplier,suplier FROM suplier";
+            String Q = "SELECT id,name FROM supplier";
             ResultSet R = S.executeQuery(Q);
             cmbSuplier.removeAllItems();
-            while (R.next()) {                 
-                int id = R.getInt("id_suplier");
-                String name = R.getString("suplier");
-                cmbSuplier.addItem(id+" - "+name);
-            } 
+            while (R.next()) {
+                int id = R.getInt("id");
+                String name = R.getString("name");
+                cmbSuplier.addItem(id + "-" + name);
+            }
         } catch (Exception e) {
         }
     }
 
     private void numberOnly(KeyEvent evt) {
         char c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
     }

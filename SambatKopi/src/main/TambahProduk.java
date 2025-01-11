@@ -303,7 +303,7 @@ public class TambahProduk extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
     try {
         Connection K = koneksi.Go();
-        String Q = "INSERT INTO product ("
+        String Q = "INSERT INTO products ("
                 + "product_code,"
                 + "product_name,"
                 + "product_image, "
