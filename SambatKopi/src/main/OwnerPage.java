@@ -1365,7 +1365,7 @@ public class OwnerPage extends javax.swing.JFrame {
         try (Connection conn = config.koneksi.Go(); PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setString(1, dariString);
-            pstmt.setString(2, sampaiString);
+             pstmt.setString(2, sampaiString);
 
             ResultSet rs = pstmt.executeQuery();
 
