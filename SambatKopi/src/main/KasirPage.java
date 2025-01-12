@@ -454,7 +454,7 @@ public class KasirPage extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel5)
                                 .addComponent(lblTotalHarga))
-                            .addGap(11, 11, 11)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel8)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -468,7 +468,7 @@ public class KasirPage extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jLabel16))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         card2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 220));
@@ -885,7 +885,6 @@ public class KasirPage extends javax.swing.JFrame {
                 String pName = R.getString("product_name");
                 double pPr = R.getDouble("product_price_s");
                 int pSt = R.getInt("product_stock");
-
 //                boolean adadiTabel = cekID();                
                 //cek, apakah produk sudah ada di keranjang
                 int dt = tblCart.getRowCount();//0
@@ -903,8 +902,6 @@ public class KasirPage extends javax.swing.JFrame {
                             break;
                         }
                     }
-
-                    //percabangan +QTY atau add new produk
                     if (ada) {
                         tblCart.setValueAt(QTY + 1, baris, 2);
                     } else {
