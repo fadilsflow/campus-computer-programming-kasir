@@ -1,13 +1,3 @@
----
-title: kasir Desktop - Java
-date: 
-tags:
-  - general
-  - notes
-notes list:
-  - "[[$General Notes List]]"
-  - "[[$List All Notes]]"
----
 # kasir Desktop - Java
 Aplikasi ini dibuat untuk tugas akhir mata Kuliah Pemrograman Komputer. Mempunyai 3 Role atau halaman user yaitu = [ admin, kasir, owner ]. Setiap Role memiliki fitur atau hak akses yang berbeda beda.
 
