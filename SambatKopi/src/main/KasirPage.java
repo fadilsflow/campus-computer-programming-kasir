@@ -818,6 +818,8 @@ public class KasirPage extends javax.swing.JFrame {
 
             // Clear cart
             clearCart();
+            loadData();
+            loadLaporan();
 
         } catch (SQLException e) {
             e.printStackTrace();
