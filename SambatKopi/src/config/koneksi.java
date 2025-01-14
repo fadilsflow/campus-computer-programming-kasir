@@ -10,9 +10,9 @@ public class koneksi {
     public static Connection Go(){
         try {
             MysqlDataSource m = new MysqlDataSource();
-            String url = "jdbc:mysql://localhost:8889/sambat";
+            String url = "jdbc:mysql://localhost:3306/sambat"; // v
             String user = "root";
-            String pass = "root";
+            String pass = "vipas";
             
             Connection C = DriverManager.getConnection(url, user, pass);
             System.out.println("Koneksi sukses");
