@@ -1220,7 +1220,6 @@ public class OwnerPage extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            // Optionally, you can show an error message to the user
         }
     }
 

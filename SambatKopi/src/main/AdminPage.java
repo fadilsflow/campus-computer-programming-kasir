@@ -656,10 +656,11 @@ public class AdminPage extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHapusprodukActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        String key = jTextField2.getText().trim();
-        if (!key.isEmpty()) {
-            viewDataProduk(key);
-        }
+    String key = jTextField2.getText().trim();
+    if (!key.isEmpty()) {
+        // Panggil metode viewDataProduk dengan query pencarian berdasarkan kode produk
+        viewDataProduk("WHERE product_code LIKE '%" + key + "%'");
+    }
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void btnUbahProdukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahProdukActionPerformed
